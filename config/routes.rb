@@ -1,27 +1,27 @@
 Rails.application.routes.draw do
-  namespace :user do
-    get 'comments/edit'
+  
+  root to: 'user/homes#top'
+  
+  scope module: :user do
+    get "/about" => "homes#about"
+    get "users/mypage" => "users#show"
+    get "users/information/edit" => "users#edit"
+    patch "users/information" => "users#update"
+    get "users/check" => "users#check"
+    patch "users/withdraw" => "users#withdraw"
+    #get '/genre/search' => 'searches#genre_search'
+    resources :comments, only: [:edit, :update]
+    resources :likes, only: [:index]
+    # resources :users, only: [:edit, :update, :index, :show]
+    resources :posts, only: [:new, :create, :index, :show, :edit, :update]
   end
-  namespace :user do
-    get 'likes/index'
-  end
-  namespace :user do
-    get 'users/index'
-    get 'users/show'
-    get 'users/edit'
-  end
-  namespace :user do
-    get 'posts/new'
-    get 'posts/index'
-    get 'posts/show'
-    get 'posts/edit'
-  end
+
   namespace :admin do
     get '/' => 'homes#top'
+    resources :comments, only: [:edit, :update]
+    resources :users, only: [:edit, :update, :index, :show]
   end
-  namespace :user do
-    root to: 'user/homes#top'
-  end
+
   # 顧客用
   # URL /customers/sign_in ...
   devise_for :users, skip: [:passwords], controllers: {

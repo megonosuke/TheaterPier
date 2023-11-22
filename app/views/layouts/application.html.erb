@@ -6,11 +6,32 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <!-- エラーが出るため上記を_link_から_pack_に変更し、下記をコメントアウトで -->
+    <%#= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header>
+      <% if user_signed_in? %>
+          <%= render 'layouts/user_header' %>
+        <% elsif admin_signed_in? %>
+          <%= render 'layouts/admin_header' %>
+        <% else %>
+          <%= render 'layouts/header' %>
+        <% end %>
+
+      <div class="search_form">
+        <div class="col-8">
+          <div class="row justify-content-end my-2">
+            <%= text_field_tag :search %>
+            <%= submit_tag "🔎", class: "btn btn-light" %>
+          </div>
+        </div>
+      </div>
+
+    </header>
     <%= yield %>
+    <%= render 'layouts/footer' %>
   </body>
 </html>

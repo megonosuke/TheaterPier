@@ -1,0 +1,9 @@
+<div class="col-8">
+  <div class="row justify-content-end my-2">
+    <div class="mr-3 menu"><%=link_to 'マイページ', customers_mypage_path, class: "btn btn-warning" %></div>
+    <div class="mr-3 menu"><%= link_to '商品一覧', items_path, class: "btn btn-warning" %></div>
+    <div class="mr-3 menu"><%= link_to 'カート', cart_items_path, class: "btn btn-warning" %></div>
+    <div class="mr-3 menu"><%= button_to 'ログアウト', destroy_customer_session_path, method: :delete, class: "btn btn-danger" %></div>
+  </div>
+  <div class="row justify-content-end my-2">ようこそ、<%= current_customer.last_name %>さん！</div>
+</div>
