@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   namespace :admin do
-    get 'homes/top'
+    get '/' => 'homes#top'
   end
   namespace :user do
-    get 'homes/top'
+    root to: 'user/homes#top'
   end
   # 顧客用
   # URL /customers/sign_in ...
