@@ -1,4 +1,21 @@
 Rails.application.routes.draw do
+  namespace :user do
+    get 'comments/edit'
+  end
+  namespace :user do
+    get 'likes/index'
+  end
+  namespace :user do
+    get 'users/index'
+    get 'users/show'
+    get 'users/edit'
+  end
+  namespace :user do
+    get 'posts/new'
+    get 'posts/index'
+    get 'posts/show'
+    get 'posts/edit'
+  end
   namespace :admin do
     get '/' => 'homes#top'
   end
