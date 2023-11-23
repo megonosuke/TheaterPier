@@ -1,10 +1,24 @@
 <div class="container">
   <div class="row">
-    <div class="col-4">
+    <div class="col-3">
       <%= render "user/side_bar" %>
     </div>
     <div class="col-8">
-      投稿編集
+      <h1>Editing Post</h1>
+      
+      <%= form_with model: @post do |f| %>
+        <label for="inputTitle">Title</label><br>
+        <%= f.text_field :title, autofocus: true, id:"inputTitle" %><br>
+      
+        <label for="inputContent">Opinion</label><br>
+        <%= f.text_area :content, autofocus: true, id:"Content" %><br>
+      
+        <%= f.submit 'Update Post' %>
+      
+      <% end %>
+      
+      <%= link_to "Show", post_path(@post) %> |
+      <%= link_to "Back", posts_path %>
     </div>
   </div>
 </div>

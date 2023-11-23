@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   
   root to: 'user/homes#top'
   
+  
   scope module: :user do
     get "/about" => "homes#about"
     get "users/mypage" => "users#show"
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
     patch "users/information" => "users#update"
     get "users/check" => "users#check"
     patch "users/withdraw" => "users#withdraw"
+    resources :users, only: [:edit, :index, :show, :update]
     #get '/genre/search' => 'searches#genre_search'
     resources :comments, only: [:edit, :update]
     resources :likes, only: [:index]

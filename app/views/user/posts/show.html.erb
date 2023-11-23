@@ -1,10 +1,17 @@
 <div class="container">
   <div class="row">
-    <div class="col-4">
+    <div class="col-3">
       <%= render "user/side_bar" %>
     </div>
     <div class="col-8">
       投稿詳細
+      <h4>Title:</h4>
+      <p><%= @post.title %></p>
+      
+      <h4>Content:</h4>
+      <p><%= @post.content %></p>
+      <%= link_to "Edit", edit_post_path(@post) %> |
+      <%= link_to "Back", post_path(@post) %>
     </div>
   </div>
 </div>

@@ -1,10 +1,34 @@
 <div class="container">
   <div class="row">
-    <div class="col-4">
+    <div class="col-3">
       <%= render "user/side_bar" %>
     </div>
     <div class="col-8">
-      投稿一覧
+      <h1>Posts</h1>
+
+      <table class="table">
+        <thead>
+          <th></th>
+          <th>Title</th>
+          <th>Content</th>
+        </thead>
+
+        <tbody>
+          <% @posts.each do |post| %>
+          <tr>
+            <td>
+              <%= link_to user_path(post.user) do %>
+                <%= image_tag post.user.get_user_image(100,100) %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to post.title, post_path(post.id) %>
+            </td>
+            <td><%= post.body %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
