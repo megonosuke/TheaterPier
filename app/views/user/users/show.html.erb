@@ -1,2 +1,44 @@
-<h1>User::Users#show</h1>
-<p>Find me in app/views/user/users/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <h2>マイページ</h2>
+      <h4>ユーザー情報</h4>
+      <%= link_to '編集する', edit_user_registration_path, class:"btn btn-success" %>
+      <div class="row">
+          <div class="col-12 mt-3">
+            <table class="table table-bordered">
+              <tr>
+                  <th></th>
+                  <td>
+                    <% if @user.avatar.attached? %>
+                      <%= image_tag @user.avatar.variant(resize: "100x100"), alt: 'ユーザー画像' %>
+                    <% else %>
+                      <%= image_tag 'no_image.jpg', alt: '画像はまだありません', style: 'width: 100px; height: 100px;' %>
+                    <% end %>
+                  </td>
+              </tr>
+              <tr>
+                  <th>ユーザー名</th>
+                  <td><%= @user.name %></td>
+              </tr>
+              <tr>
+                  <th>メールアドレス</th>
+                  <td><%= @user.email %></td>
+              </tr>
+            </table>
+            <h2>投稿一覧</h2>
+            <% if @posts.any? %>
+              <% @posts.each do |post| %>
+                <div>
+                  <h3><%= post.title %></h3>
+                  <p><%= post.content %></p>
+                </div>
+              <% end %>
+            <% else %>
+              <p>投稿はまだありません。</p>
+            <% end %>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

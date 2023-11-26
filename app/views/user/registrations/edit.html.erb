@@ -8,6 +8,14 @@
 
         <table>
           <tr>
+            <th align="left"></th>
+            <td>
+              <div class="field">
+                <%= f.file_field :avatar %>
+              </div>
+            </td>
+          </tr>
+          <tr>
             <th align="left">ユーザー名</th>
             <td>
               <div class="field">
@@ -25,7 +33,7 @@
           </tr>
         </table>
         <div class="actions">
-          <%= f.submit "編集内容を保存", class:"btn btn-success" %>
+          <%= f.submit "更新する", class:"btn btn-success" %>
         </div>
       <% end %>
       <div><%= link_to "退会する", users_check_path, class: "btn btn-danger" %></div>

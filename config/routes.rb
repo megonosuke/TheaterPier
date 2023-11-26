@@ -11,14 +11,23 @@ Rails.application.routes.draw do
     get "users/check" => "users#check"
     patch "users/withdraw" => "users#withdraw"
     get 'search' => 'posts#search'
-    
-    
+    resources :users do
+      member do
+        get 'liked_posts'
+      end
+    end
+
+
     resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
-      resource :likes, only: [:create, :destroy]
+      # resource :like, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]
+      member do
+        post 'like'
+        delete 'unlike'
+      end
     end
   end
-  
+
   # 顧客用
     # URL /customers/sign_in ...
     devise_for :users, skip: [:passwords], controllers: {
@@ -26,7 +35,7 @@ Rails.application.routes.draw do
       sessions: 'user/sessions'
     }
 
-  
+
   # # Set the root to your desired path after sign in
   #   devise_scope :user do
   #     authenticated :user do
@@ -36,12 +45,12 @@ Rails.application.routes.draw do
   #     unauthenticated do
   #       root 'user/homes#top', as: :unauthenticated_root
   #     end
-      
-      
+
+
     # end
 
-   
-    
+
+
 
 
 

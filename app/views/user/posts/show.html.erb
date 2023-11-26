@@ -18,36 +18,26 @@
       <%= link_to "戻る", posts_path %>
 
       <div>
-        <% if @post.liked?(current_user) %>
-          <%= link_to post_likes_path(@post.id), method: :delete do %>
-            <span style="color:red;">❤︎</span>
-          <% end %>
-        <% else %>
-          <%= link_to post_likes_path(@post.id), method: :post do %>
-            <span>❤︎</span>
+        <% if user_signed_in? %>
+          <% if @post.liked_by?(current_user) %>
+            <%= link_to '❤️', unlike_post_path(@post), method: :delete, remote: true %>
+          <% else %>
+            <%= link_to '♡', like_post_path(@post), method: :post, remote: true %>
           <% end %>
         <% end %>
       </div>
 
       <div>
-        <p>コメント件数：<%= @post.comments.count %></p>
+        <h2>コメント</h2>
+        <%= form_with(model: [@post, Comment.new], local: true) do |form| %>
+          <%= form.text_area :content, placeholder: 'コメントを入力してください' %>
+          <%= form.submit 'コメントする' %>
+        <% end %>
+
+        
         <% @post.comments.each do |comment| %>
-          <p><%= image_tag comment.user.get_user_image(100,100) %></p>
-          <%= comment.user.name %>
-          <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.content %>
+          <p><strong><%= comment.user.name %>:</strong> <%= comment.content %></p>
         <% end %>
-      </div>
-      <div>
-        <%= form_with model: [@post, @comment] do |f| %>
-          <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-          <%= f.submit "送信する" %>
-        <% end %>
-
-
-        <% if @comment.user == current_user %>
-          <%= link_to "削除", '/posts/:post_id/comments/:id', method: :delete %>
-        <% end %>
-
       </div>
     </div>
   </div>

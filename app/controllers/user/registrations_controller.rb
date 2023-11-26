@@ -66,5 +66,17 @@ class User::RegistrationsController < Devise::RegistrationsController
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
+  
+  def update_resource(resource, params)
+    resource.update_without_password(params)
+  end
+
+  
+  private
+
+  def user_params
+    params.require(:user).permit(:avatar, :name, :email, :password, :password_confirmation, :current_password)
+  end
+
 
 end
