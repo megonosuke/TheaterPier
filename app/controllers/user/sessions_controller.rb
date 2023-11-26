@@ -24,4 +24,20 @@ class User::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+
+  protected
+
+  def reject_user
+    @user = User.find_by(email: params[:user][:email])
+    if @user
+      if @user.valid_password?(params[:user][:password]) && (@user.is_delete == true)
+        flash[:notice] = "退会済みです。"
+        redirect_to new_user_registration_path
+      else
+        flash[:notice] = "必須項目を入力してください。"
+      end
+    else
+      flash[:notice] = "該当するユーザーが見つかりません。"
+    end
+  end
 end

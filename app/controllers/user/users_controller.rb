@@ -1,10 +1,14 @@
 class User::UsersController < ApplicationController
-  def index
-  end
-
   def show
+    puts "show アクションが呼ばれました"
   end
 
-  def edit
+  def check
+    puts "check アクションが呼ばれました"
   end
+
+  def withdraw
+    puts "withdraw アクションが呼ばれました"
+  end
+
 end

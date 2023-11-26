@@ -4,21 +4,22 @@
       <%= render "user/side_bar" %>
     </div>
     <div class="col-8">
-      <h1>Editing Post</h1>
-      
+      <h1>投稿編中</h1>
+
       <%= form_with model: @post do |f| %>
         <label for="inputTitle">Title</label><br>
         <%= f.text_field :title, autofocus: true, id:"inputTitle" %><br>
-      
+
         <label for="inputContent">Opinion</label><br>
         <%= f.text_area :content, autofocus: true, id:"Content" %><br>
-      
-        <%= f.submit 'Update Post' %>
-      
+
+        
+        <%= f.submit '更新する' %>
+
       <% end %>
-      
-      <%= link_to "Show", post_path(@post) %> |
-      <%= link_to "Back", posts_path %>
+
+      <%= link_to "詳細", post_path(@post) %> |
+      <%= link_to "戻る", posts_path %>
     </div>
   </div>
 </div>
