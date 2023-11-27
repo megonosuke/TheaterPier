@@ -8,8 +8,10 @@ class Post < ApplicationRecord
   has_many :tags, through: :post_tags
   belongs_to :user
   
+  scope :published, -> { where(is_published: true) }
+  
   def liked_by?(user)
-    likes.exists?(user: user)
+    likes.exists?(user_id: user_id)
   end
   
   def self.search_by_keyword(keyword)

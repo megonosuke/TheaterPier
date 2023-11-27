@@ -1,30 +1,26 @@
 Rails.application.routes.draw do
 
-  root to: 'user/homes#top'
+  root to: 'user/posts#index'
 
 
   scope module: :user do
     get "/about" => "homes#about"
     get "users/mypage" => "users#show"
-    get "users/information/edit" => "users#edit"
-    patch "users/information" => "users#update"
+    get "users/mypage/edit" => "users#edit"
+    patch "users/mypage" => "users#update"
     get "users/check" => "users#check"
     patch "users/withdraw" => "users#withdraw"
     get 'search' => 'posts#search'
-    resources :users do
-      member do
-        get 'liked_posts'
-      end
-    end
+
 
 
     resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
-      # resource :like, only: [:create, :destroy]
-      resources :comments, only: [:create, :destroy]
       member do
-        post 'like'
-        delete 'unlike'
+        put 'toggle_published', to: 'posts#toggle_published'
       end
+
+      resource :like, only: [:create, :destroy, :index]
+      resources :comments, only: [:create, :destroy]
     end
   end
 
@@ -56,8 +52,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get '/' => 'homes#top'
-    resources :comments, only: [:edit, :update]
-    resources :users, only: [:edit, :update, :index, :show]
+    resources :comments, only: [:index, :destroy]
+    resources :users, only: [:index,:new,:create,:show,:edit,:update]
   end
 
   # 管理者用

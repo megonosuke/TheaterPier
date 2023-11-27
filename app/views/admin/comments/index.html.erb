@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <%= render "admin/side_bar" %>
+    </div>
+    <div class="col-8">
+      <h3>コメント一覧</h3>
+      <table class="table">
+        <thead>
+          <th>ユーザー名</th>
+          <th>コメント</th>
+          <th></th>
+        </thead>
+
+        <tbody>
+          <% @comments.each do |comment| %>
+          <tr>
+            <td>
+              <%= @users.find(comment.user_id).name %>
+            </td>
+            <td>
+              <%= comment.content %>
+            </td>
+            <td>
+              <%= button_to "削除", admin_comment_path(comment), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

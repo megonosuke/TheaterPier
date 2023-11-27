@@ -1,2 +1,6 @@
-<h1>User::Likes#index</h1>
-<p>Find me in app/views/user/likes/index.html.erb</p>
+<h1>いいねした投稿一覧</h1>
+<ul>
+  <% @like_posts.each do |post| %>
+    <li><%= post.title %></li>
+  <% end %>
+</ul>

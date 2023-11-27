@@ -55,18 +55,26 @@ class User::PostsController < ApplicationController
     redirect_to posts_path, notice: '投稿が削除されました。'
   end
 
-  def like
+  # def like
+  #   @post = Post.find(params[:id])
+  #   @post.likes.create(user: current_user)
+  #   redirect_to post_path(@post), notice: '投稿にいいねしました。'
+  # end
+
+  # def unlike
+  #   @post = Post.find(params[:id])
+  #   like = @post.likes.find_by(user: current_user)
+  #   like.destroy if like
+  #   redirect_to post_path(@post), notice: 'いいねを取り消しました。'
+  # end
+  
+  def toggle_published
     @post = Post.find(params[:id])
-    @post.likes.create(user: current_user)
-    redirect_to post_path(@post), notice: '投稿にいいねしました。'
+    @post.toggle!(:is_published)
+    redirect_to post_path(@post), notice: '公開状態を切り替えました。'
   end
 
-  def unlike
-    @post = Post.find(params[:id])
-    like = @post.likes.find_by(user: current_user)
-    like.destroy if like
-    redirect_to post_path(@post), notice: 'いいねを取り消しました。'
-  end
+
 
 
 
@@ -75,6 +83,8 @@ class User::PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :content, :tag_names)
   end
+  
+  
 
   def is_matching_login_user
     @post = Post.find(params[:id])
@@ -83,4 +93,9 @@ class User::PostsController < ApplicationController
       redirect_to posts_path
     end
   end
+  
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
 end

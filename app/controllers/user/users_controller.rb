@@ -15,9 +15,9 @@ class User::UsersController < ApplicationController
     redirect_to root_path
   end
   
-  def liked_posts
-    @user = current_user
-    @liked_posts = @user.liked_posts
-  end
+  # def liked_posts
+  #   @user = current_user
+  #   @liked_posts = @user.liked_posts
+  # end
 
 end
