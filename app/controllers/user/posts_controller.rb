@@ -55,18 +55,18 @@ class User::PostsController < ApplicationController
     redirect_to posts_path, notice: '投稿が削除されました。'
   end
 
-  # def like
-  #   @post = Post.find(params[:id])
-  #   @post.likes.create(user: current_user)
-  #   redirect_to post_path(@post), notice: '投稿にいいねしました。'
-  # end
+  def like
+    @post = Post.find(params[:id])
+    @post.likes.create(user: current_user)
+    redirect_to post_path(@post), notice: '投稿にいいねしました。'
+  end
 
-  # def unlike
-  #   @post = Post.find(params[:id])
-  #   like = @post.likes.find_by(user: current_user)
-  #   like.destroy if like
-  #   redirect_to post_path(@post), notice: 'いいねを取り消しました。'
-  # end
+  def unlike
+    @post = Post.find(params[:id])
+    like = @post.likes.find_by(user: current_user)
+    like.destroy if like
+    redirect_to post_path(@post), notice: 'いいねを取り消しました。'
+  end
   
   def toggle_published
     @post = Post.find(params[:id])

@@ -5,15 +5,15 @@ class User::LikesController < ApplicationController
     @post = Post.find(params[:post_id])
     @like = Like.new(user: current_user, post: @post)
   
-    if @like.save
-      # 作成成功時の処理
-      puts "いいねが作成されました。"
-      redirect_to @post, notice: '投稿にいいねしました。'
-    else
-      # 作成失敗時の処理
-      puts "いいねの作成に失敗しました。"
-      redirect_to @post, alert: 'いいねに失敗しました。'
-    end
+    # if @like.save
+    #   # 作成成功時の処理
+    #   puts "いいねが作成されました。"
+    #   redirect_to @post, notice: '投稿にいいねしました。'
+    # else
+    #   # 作成失敗時の処理
+    #   puts "いいねの作成に失敗しました。"
+    #   redirect_to @post, alert: 'いいねに失敗しました。'
+    # end
   end
 
 
