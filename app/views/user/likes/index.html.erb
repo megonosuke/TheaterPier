@@ -1,6 +1,19 @@
-<h1>いいねした投稿一覧</h1>
-<ul>
-  <% @like_posts.each do |post| %>
-    <li><%= post.title %></li>
-  <% end %>
-</ul>
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <%= render "user/side_bar" %>
+    </div>
+    <div class="col-8">
+      <h1>いいねした投稿一覧</h1>
+      <ul>
+        <% if @like_posts.present? %>
+          <% @like_posts.each do |post| %>
+            <%= post.title %>
+          <% end %>
+        <% else %>
+          <p>いいねした投稿はありません。</p>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

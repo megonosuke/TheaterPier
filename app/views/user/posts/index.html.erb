@@ -4,7 +4,7 @@
       <%= render "user/side_bar" %>
     </div>
     <div class="col-8">
-      <h1>Posts</h1>
+      <h1>投稿一覧</h1>
       <%= form_with(url: posts_path, method: :get) do |form| %>
         <%= form.text_field :keyword, placeholder: 'キーワード検索' %>
         <%= form.text_field :tag, placeholder: 'タグ検索' %>
@@ -13,8 +13,8 @@
 
       <table class="table">
         <thead>
-          <th>User</th>
-          <th>Title</th>
+          <th>ユーザー</th>
+          <th>タイトル</th>
           <th></th>
         </thead>
 
@@ -32,6 +32,8 @@
             <td>
               <%= link_to "#{post.comments.count} コメント", post_path(post.id) %>
               <%= link_to "#{post.likes.count} いいね", post_path(post.id) %>
+              <% Rails.logger.debug("いいねの数: #{post.likes.count}") %>
+              
             </td>
             <td>
               <%= link_to "編集", edit_post_path(post) %> |

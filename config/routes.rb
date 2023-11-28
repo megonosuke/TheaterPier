@@ -17,9 +17,10 @@ Rails.application.routes.draw do
     resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       member do
         put 'toggle_published', to: 'posts#toggle_published'
+        get 'likes', to: 'likes#index'
       end
 
-      resource :like, only: [:create, :destroy, :index]
+      resource :likes, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]
     end
   end
